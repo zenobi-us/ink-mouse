@@ -1,0 +1,29 @@
+---
+name: Setup Npm Publishing
+
+description: Configures Npm for Publishing in Github Actions
+
+inputs:
+  NpmRegistryUrl:
+    description: 'The registry url to use for the install'
+    default: 'https://registry.npmjs.org'
+  NpmRcFile:
+    description: 'The path to the .npmrc file'
+    default: '~/.npmrc'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: create .npmrc
+      shell: bash
+      env:
+        NPM_REGISTRY_URL: ${{ inputs.NpmRegistryUrl }}
+        NPM_RC_FILE: ${{ inputs.NpmRcFile }}
+      # Create .npmrc file
+      # This file is used to authenticate with the npm registry
+      # The NPM_AUTH_TOKEN is an envvar that will be used later, we
+      # don't interpolate it here now, hence the escaped $.
+      # When used in the npm publish command, it's able to
+      # interpolate the value from Environment Variables.
+      run: ${{ github.action_path }}/create-npmrc.sh $NPM_REGISTRY_URL $NPM_RC_FILE

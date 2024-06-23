@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  HUSKY: 0 # https://typicode.github.io/husky/how-to.html#ci-server-and-docker
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+# Needed for nx-set-shas within nx-cloud-main.yml, when run on the master branch
+permissions:
+  actions: read
+  contents: write
+  deployments: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  Process:
+    runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release-please.outputs.releases_created }}
+      prs_created: ${{ steps.release-please.outputs.prs_created }}
+    steps:
+      - uses: google-github-actions/release-please-action@v4
+        id: release-please
+        with:
+          token: ${{secrets.RELEASE_PLEASE_TOKEN}}
+      - name: Print Release Data
+        run: |
+          echo 'Release Data:'
+
+          echo '''
+            ${{ toJSON(steps.release-please.outputs) }}
+          '''
+
+  Deploy:
+    needs: Process
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Asdf
+        uses: ./.github/actions/setup-tooling
+        with:
+          SetupCommand: ./setup.sh
+
+      - name: Yarn
+        uses: ./.github/actions/setup-yarn
+
+      - name: Configure Publishing
+        uses: ./.github/actions/setup-npm-publish
+        with:
+          NpmRegistryUrl: https://registry.npmjs.org/
+          NpmRcFile: .npmrc
+
+      - name: Preflight
+        run: |
+          just lint
+          just types
+          just unittest
+          just build
+          just integrationtest
+
+      - if: ${{ needs.Process.outputs.releases_created == 'true' }}
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: just publish latest
+
+      - if: ${{ needs.Process.outputs.prs_created == 'true' }}
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: just publish next

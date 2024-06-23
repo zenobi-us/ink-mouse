@@ -1,0 +1,73 @@
+{
+  "name": "<PACKAGE NAME>",
+  "version": "0.0.1",
+  "dependencies": {
+    "hast-util-from-html-isomorphic": "2.0.0",
+    "hast-util-to-html": "^9.0.0",
+    "hast-util-to-string": "^3.0.0",
+    "hastscript": "^9.0.0",
+    "mdast": "3.0.0",
+    "nomnoml": "1.6.2",
+    "tslib": "^2.3.0",
+    "unified": "11.0.4",
+    "unist-util-visit-parents": "6.0.1",
+    "vfile": "6.0.1"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.3",
+    "@swc/core": "^1.6.1",
+    "@types/is-ci": "^3",
+    "@types/mock-fs": "^4.13.4",
+    "@types/node": "18.16.9",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "dedent": "^1.5.3",
+    "eslint": "~8.56.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.10",
+    "inject-markdown": "^3.0.0",
+    "is-ci": "^3.0.1",
+    "jsonc-eslint-parser": "^2.4.0",
+    "lint-staged": "^15.2.7",
+    "open": "^10.1.0",
+    "prettier": "^3.2.2",
+    "puppeteer": "^22.11.2",
+    "remark": "15.0.1",
+    "ts-node": "10.9.1",
+    "tslib": "^2.3.0",
+    "tsup": "^8.1.0",
+    "tsx": "^4.15.6",
+    "typedoc": "^0.25.8",
+    "typedoc-plugin-markdown": "^3.17.1",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.1",
+    "vite": "^5.3.1",
+    "vitest": "^1.6.0"
+  },
+  "main": "./dist/<EXPORT NAME>.js",
+  "types": "./dist/<EXPORT NAME>.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/<EXPORT NAME>.js",
+      "require": "./dist/<EXPORT NAME>.js",
+      "types": "./dist/<EXPORT NAME>.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [],
+  "author": {
+    "name": "<YOUR NAME>",
+    "email": "<YOUR GITHUB USERNAME>@users.noreply.github.com"
+  }
+}

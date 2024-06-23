@@ -1,0 +1,64 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    name: template setup test
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run Template Setup
+        run: |
+
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+
+          ./setup.bash \
+            "@foo/bar_tool" \
+            "bar_tool" \
+            "username" \
+            "author name" \
+            "username/bar_tool" \
+            "master" \
+            "Apache-2.0" \
+            "yes"
+
+      - name: Check setup result
+        run: |
+          error() {
+              printf "\033[0;31m %s \033[0m \n" "$1"
+              exit 1
+          }
+
+
+          set -xe
+
+          ls -la .
+
+          git log
+
+          test ! -d template/ || error "Template Directory Exists"
+
+          grep "Apache" LICENSE || error "License Not Found"
+
+          test "master" = "$(git rev-parse --abbrev-ref HEAD)" || error "Not on master branch"
+
+          ! git grep -F \
+                   -e "<PACKAGE NAME>" \
+              --or -e "<PACKAGE REPO>" \
+              --or -e "<YOUR NAME>" \
+              --or -e "<PRIMARY BRANCH>" \
+              --or -e "<YOUR GITHUB USERNAME>" \
+              || error "Template Placeholders Still Exist"
+
