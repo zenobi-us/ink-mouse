@@ -1,0 +1,81 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "ignorePatterns": [".yarn/cache/**/*", "node_modules/**/*", "dist/**"],
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "parser": "jsonc-eslint-parser"
+    },
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "no-nested-ternary": "error",
+        "import/no-default-export": "error",
+        "curly": "error",
+        "prefer-destructuring": [
+          "error",
+          {
+            "VariableDeclarator": {
+              "array": false,
+              "object": false
+            },
+            "AssignmentExpression": {
+              "array": false,
+              "object": false
+            }
+          }
+        ],
+        "import/first": "error",
+        "import/group-exports": "error",
+        "import/order": [
+          "error",
+          {
+            "newlines-between": "always",
+            "groups": [
+              ["builtin", "external"],
+              ["parent", "internal", "sibling"],
+              "index",
+              "object"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/consistent-type-imports": [
+          "error",
+          {
+            "prefer": "type-imports",
+            "fixStyle": "separate-type-imports"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.js"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    },
+    {
+      "files": ["tsup.config.ts", "vite.config.ts", "*.d.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
+}

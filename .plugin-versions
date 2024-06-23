@@ -1,0 +1,7 @@
+action-validator     https://github.com/mpalmer/action-validator.git            8df3ccb
+direnv               https://github.com/asdf-community/asdf-direnv.git          a2219c2
+just                 https://github.com/olofvndrhr/asdf-just.git                93771e1
+nodejs               https://github.com/asdf-vm/asdf-nodejs.git                 c5b7c40
+shellcheck           https://github.com/luizm/asdf-shellcheck.git               780d78d
+yarn                 https://github.com/twuni/asdf-yarn.git                     376c540
+just                 https://github.com/olofvndrhr/asdf-just.git                93771e1
