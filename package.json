@@ -1,6 +1,6 @@
 {
   "name": "@zenobius/ink-mouse",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {
     "hast-util-from-html-isomorphic": "2.0.0",
     "hast-util-to-html": "^9.0.0",
