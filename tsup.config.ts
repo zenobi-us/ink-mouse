@@ -8,6 +8,8 @@ export default defineConfig((options) => {
 
     entry: ['src/ink-mouse.ts'],
 
+    external: ['react', 'ink'],
+
     minify: !options.watch,
     splitting: false,
     sourcemap: true,
