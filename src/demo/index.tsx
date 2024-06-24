@@ -3,11 +3,14 @@ import type { ComponentProps, PropsWithChildren } from 'react';
 import { render, Box, Text, useStdout } from 'ink';
 import type { DOMElement } from 'ink';
 
-import { MouseProvider, useElementPosition } from '../ink-mouse';
-import { useMousePosition } from '../ink-mouse';
-import { useMouseAction } from '../ink-mouse';
-import { useOnMouseHover } from '../ink-mouse';
-import { useOnMouseClick } from '../ink-mouse';
+import {
+  MouseProvider,
+  useElementPosition,
+  useMousePosition,
+  useMouseAction,
+  useOnMouseHover,
+  useOnMouseClick,
+} from '../../dist/ink-mouse.cjs';
 
 function App() {
   return (
