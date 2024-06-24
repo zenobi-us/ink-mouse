@@ -2,6 +2,10 @@
 
 Provides mouse support for [Ink](http://github.com/vadimdemedes/ink) components.
 
+
+https://github.com/zenobi-us/react-ink-mouse/assets/61225/310e5423-2efa-457a-a61f-3964657852c6
+
+
 ## Features
 
 - Mouse position tracking
