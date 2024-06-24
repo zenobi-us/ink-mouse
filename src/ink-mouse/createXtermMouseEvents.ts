@@ -3,8 +3,8 @@ import type {
   MouseDragAction,
   MousePosition,
   MouseScrollAction,
-} from './MouseContext.js';
-import { TypedEventEmitter } from './createEventEmitter.js';
+} from './MouseContext';
+import { TypedEventEmitter } from './createEventEmitter';
 
 const createXtermMouseEvents = () => {
   return new TypedEventEmitter<{

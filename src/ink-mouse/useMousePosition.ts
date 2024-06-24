@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useMouse } from './useMouse.js';
+import { useMouse } from './useMouse';
 
 function useMousePosition() {
   const mouse = useMouse();

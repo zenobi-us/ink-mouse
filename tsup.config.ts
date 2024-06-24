@@ -2,11 +2,13 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig((options) => {
   return {
-    name: 'reactink-mouse',
+    name: 'ink-mouse',
 
     shims: true,
 
-    entry: ['src/package_name/@/.ts'],
+    entry: ['src/ink-mouse.ts'],
+
+    external: ['react', 'ink'],
 
     minify: !options.watch,
     splitting: false,

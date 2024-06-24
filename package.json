@@ -1,7 +1,6 @@
 {
   "name": "@zenobius/ink-mouse",
   "version": "0.0.1",
-  "type": "module",
   "dependencies": {
     "hast-util-from-html-isomorphic": "2.0.0",
     "hast-util-to-html": "^9.0.0",
@@ -48,13 +47,13 @@
     "vite": "^5.3.1",
     "vitest": "^1.6.0"
   },
-  "main": "./dist/ink-mouse/.js",
-  "types": "./dist/ink-mouse/.d.ts",
+  "main": "./dist/ink-mouse.js",
+  "types": "./dist/ink-mouse.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/ink-mouse/.js",
-      "require": "./dist/ink-mouse/.js",
-      "types": "./dist/ink-mouse/.d.ts"
+      "import": "./dist/ink-mouse.js",
+      "require": "./dist/ink-mouse.js",
+      "types": "./dist/ink-mouse.d.ts"
     }
   },
   "files": [

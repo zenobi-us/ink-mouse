@@ -1,10 +1,10 @@
 import { useCallback, useEffect, type RefObject } from 'react';
 import { type DOMElement } from 'ink';
 
-import { useMouse } from './useMouse.js';
-import type { MousePosition } from './MouseContext.js';
-import { isIntersecting } from './isIntersecting.js';
-import { getElemenetPosition } from './useElementPosition.js';
+import { useMouse } from './useMouse';
+import type { MousePosition } from './MouseContext';
+import { isIntersecting } from './isIntersecting';
+import { getElemenetPosition } from './useElementPosition';
 
 function useOnMouseHover(
   ref: RefObject<DOMElement>,

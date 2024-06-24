@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "Node16",
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "esModuleInterop": true,

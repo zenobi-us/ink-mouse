@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { MouseContext } from './MouseContext.js';
+import { MouseContext } from './MouseContext';
 
 export function useMouse() {
   const context = useContext(MouseContext);

@@ -1,8 +1,8 @@
-export { MouseProvider } from './ink-mouse/MouseProvider.js';
-export { useMouse } from './ink-mouse/useMouse.js';
-export { useOnMouseClick } from './ink-mouse/useOnMouseClick.js';
-export { useOnMouseHover } from './ink-mouse/useOnMouseHover.js';
-export { useOnMouseState } from './ink-mouse/useOnMouseState.js';
-export { useMousePosition } from './ink-mouse/useMousePosition.js';
-export { useElementPosition } from './ink-mouse/useElementPosition.js';
-export { useMouseAction } from './ink-mouse/useMouseAction.js';
+export { MouseProvider } from './ink-mouse/MouseProvider';
+export { useMouse } from './ink-mouse/useMouse';
+export { useOnMouseClick } from './ink-mouse/useOnMouseClick';
+export { useOnMouseHover } from './ink-mouse/useOnMouseHover';
+export { useOnMouseState } from './ink-mouse/useOnMouseState';
+export { useMousePosition } from './ink-mouse/useMousePosition';
+export { useElementPosition } from './ink-mouse/useElementPosition';
+export { useMouseAction } from './ink-mouse/useMouseAction';

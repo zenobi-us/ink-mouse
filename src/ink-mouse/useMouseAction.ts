@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { useMouse } from './useMouse.js';
+import { useMouse } from './useMouse';
 import type {
   MouseClickAction,
   MouseDragAction,
   MouseScrollAction,
-} from './MouseContext.js';
+} from './MouseContext';
 
 function useMouseAction() {
   const mouse = useMouse();
