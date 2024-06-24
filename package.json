@@ -1,13 +1,16 @@
 {
-  "name": "reactink-mouse",
+  "name": "@zenobius/ink-mouse",
   "version": "0.0.1",
+  "type": "module",
   "dependencies": {
     "hast-util-from-html-isomorphic": "2.0.0",
     "hast-util-to-html": "^9.0.0",
     "hast-util-to-string": "^3.0.0",
     "hastscript": "^9.0.0",
+    "ink": "^5.0.1",
     "mdast": "3.0.0",
     "nomnoml": "1.6.2",
+    "react": "^18.2.0",
     "tslib": "^2.3.0",
     "unified": "11.0.4",
     "unist-util-visit-parents": "6.0.1",
@@ -17,11 +20,10 @@
     "@arethetypeswrong/cli": "^0.15.3",
     "@swc/core": "^1.6.1",
     "@types/is-ci": "^3",
-    "@types/mock-fs": "^4.13.4",
     "@types/node": "18.16.9",
+    "@types/react": "^18.0.32",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
-    "dedent": "^1.5.3",
     "eslint": "~8.56.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -34,7 +36,6 @@
     "lint-staged": "^15.2.7",
     "open": "^10.1.0",
     "prettier": "^3.2.2",
-    "puppeteer": "^22.11.2",
     "remark": "15.0.1",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
@@ -47,13 +48,13 @@
     "vite": "^5.3.1",
     "vitest": "^1.6.0"
   },
-  "main": "./dist/package_name/@/.js",
-  "types": "./dist/package_name/@/.d.ts",
+  "main": "./dist/ink-mouse/.js",
+  "types": "./dist/ink-mouse/.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/package_name/@/.js",
-      "require": "./dist/package_name/@/.js",
-      "types": "./dist/package_name/@/.d.ts"
+      "import": "./dist/ink-mouse/.js",
+      "require": "./dist/ink-mouse/.js",
+      "types": "./dist/ink-mouse/.d.ts"
     }
   },
   "files": [
@@ -68,6 +69,10 @@
   "keywords": [],
   "author": {
     "name": "Zeno Jiricek",
-    "email": "zenobi-us@users.noreply.github.com"
+    "email": "airtonix@users.noreply.github.com"
+  },
+  "repository": {
+    "type": "github",
+    "url": "http://github.com/zenobi-us/ink-mouse"
   }
 }

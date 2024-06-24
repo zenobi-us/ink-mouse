@@ -6,8 +6,8 @@
   },
   "include": [
     "vite.config.ts",
-    "template/src/**/*.test.ts",
-    "template/src/**/*.spec.ts",
-    "template/src/**/*.d.ts"
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
   ]
 }

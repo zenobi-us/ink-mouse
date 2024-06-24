@@ -23,10 +23,16 @@ types:
         ./tsconfig.json
 
 unittest:
-    @vitest --dir ./src
+    @vitest \
+        --dir ./src
 
 integrationtest:
-    tsx e2e/produces-rendered-svg.test.ts
+    @echo 0
+
+dev:
+    @tsx \
+        --watch \
+        ./src/demo/index.tsx
 
 build:
     @tsup \
@@ -40,7 +46,7 @@ docs:
         --plugin typedoc-plugin-markdown \
         --tsconfig ./tsconfig.lib.json \
         --out dist/docs \
-        ./src/remark-nomnoml.ts \
+        ./src/ink-mouse.ts \
             --hideBreadcrumbs true \
             --namedAnchors true \
             --disableSources \
