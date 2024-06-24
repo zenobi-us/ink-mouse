@@ -92,6 +92,18 @@ render(<App />);
 
 <!--- @@inject-end: dist/docs/modules.md#Functions --->
 
+## Contributing
+
+This project uses ASDF and Yarn.
+
+1. clone repo
+2. make branch: `git checkout [fix|feat|docs|chore]/blah-blah` (see [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+3. run `./tools.sh`
+4. run `just setup`
+5. run `just demo`
+6. run `just unittest`
+7. run `just lint`
+
 ## Todo
 
 - [ ] Add tests.
