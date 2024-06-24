@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
-import type { XtermMouseState } from './useXtermMouse.js';
-import type { XtermMouseEvents } from './createXtermMouseEvents.js';
+import type { XtermMouseState } from './useXtermMouse';
+import type { XtermMouseEvents } from './createXtermMouseEvents';
 type MousePosition = {
   x: number;
   y: number;

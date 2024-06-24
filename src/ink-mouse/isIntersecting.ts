@@ -1,4 +1,4 @@
-import type { MousePosition } from './MouseContext.js';
+import type { MousePosition } from './MouseContext';
 
 // const LEFT_ADJUSTMENT = 13;
 // const TOP_ADJUSTMENT = 2;

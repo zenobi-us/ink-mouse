@@ -1,4 +1,4 @@
-import { ANSI_RESPONSE_PATTERNS } from './constants.js';
+import { ANSI_RESPONSE_PATTERNS } from './constants';
 
 const parseXYCoordinates = (input: string, pattern: RegExp) => {
   if (!pattern.test(input)) {

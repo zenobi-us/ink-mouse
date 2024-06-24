@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 
-import { AnsiSgrParser } from './ansiParser.js';
+import { AnsiSgrParser } from './ansiParser';
 
 test('scroll', async () => {
   expect(AnsiSgrParser.isScroll('[<64;1;1M')).toBe(true);

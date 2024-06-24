@@ -10,7 +10,7 @@ import {
   useMouseAction,
   useOnMouseHover,
   useOnMouseClick,
-} from '../../dist/ink-mouse.cjs';
+} from '../..';
 
 function App() {
   return (

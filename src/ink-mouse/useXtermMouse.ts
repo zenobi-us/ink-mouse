@@ -5,12 +5,12 @@ import type {
   MouseDragAction,
   MousePosition,
   MouseScrollAction,
-} from './MouseContext.js';
+} from './MouseContext';
 import {
   createXtermMouseEvents,
   type XtermMouseEvents,
-} from './createXtermMouseEvents.js';
-import { xtermMouse } from './xtermMouse.js';
+} from './createXtermMouseEvents';
+import { xtermMouse } from './xtermMouse';
 
 function useXtermMouse() {
   const events = useRef<XtermMouseEvents>(createXtermMouseEvents());

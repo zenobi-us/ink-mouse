@@ -3,9 +3,9 @@ import type {
   MouseDragAction,
   MousePosition,
   MouseScrollAction,
-} from './MouseContext.js';
-import { ANSI_CODES } from './constants.js';
-import { AnsiSgrParser } from './ansiParser.js';
+} from './MouseContext';
+import { ANSI_CODES } from './constants';
+import { AnsiSgrParser } from './ansiParser';
 
 export function xtermMouse({
   onPosition,
