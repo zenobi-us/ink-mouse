@@ -1,6 +1,6 @@
 {
   "name": "@zenobius/ink-mouse",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "peerDependencies": {
     "ink": "^5.0.1",
     "react": "^18.2.0"
