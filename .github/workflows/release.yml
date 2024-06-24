@@ -48,7 +48,7 @@ jobs:
       - name: Asdf
         uses: ./.github/actions/setup-tooling
         with:
-          SetupCommand: ./setup.sh
+          SetupCommand: ./tools.sh
 
       - name: Yarn
         uses: ./.github/actions/setup-yarn

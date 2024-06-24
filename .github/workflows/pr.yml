@@ -22,7 +22,7 @@ jobs:
       - name: Asdf
         uses: ./.github/actions/setup-tooling
         with:
-          SetupCommand: ./setup.sh
+          SetupCommand: ./tools.sh
 
       - name: Install Node Modules
         uses: ./.github/actions/setup-yarn
