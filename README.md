@@ -3,8 +3,7 @@
 Provides mouse support for [Ink](http://github.com/vadimdemedes/ink) components.
 
 
-https://github.com/zenobi-us/react-ink-mouse/assets/61225/310e5423-2efa-457a-a61f-3964657852c6
-
+https://github.com/zenobi-us/ink-mouse/assets/61225/344e4b22-8c47-437a-b304-d1e455480dfe
 
 ## Features
 
