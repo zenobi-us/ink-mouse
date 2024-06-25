@@ -2,8 +2,7 @@
 
 Provides mouse support for [Ink](http://github.com/vadimdemedes/ink) components.
 
-
-https://github.com/zenobi-us/ink-mouse/assets/61225/344e4b22-8c47-437a-b304-d1e455480dfe
+https://github.com/zenobi-us/ink-mouse/assets/61225/658ad469-6438-4bff-8695-e2fe9325f816
 
 ## Features
 
@@ -109,10 +108,18 @@ This project uses ASDF and Yarn.
 
 ## Todo
 
+- [ ] Support absolute elements
+  - Elements positioned absolutely that occupy same space as other elements will mean they both recieve click and hover events.
+  - Ink supports absolute positioning. I think z order is based on order rendered.
+  - This means to simluate knowing the z order, we might need to register the order in which elements subscribe to events? 
 - [ ] Add tests.
   - testing a device may be difficult; but the implementation is sufficiently abstracted from the device that it should be possible to mock the device input stream.
+    - [x] stdin event stream parsing
+    - [ ] position tracking
+    - [ ] click tracking
+    - [ ] drag tracking
+    - [ ] z order priority
 - [ ] Add Drag examples
-  - Not sure if Ink supports z layers, but it would be nice to have a draggable element that can be dragged over other elements.
 - [ ] Research Windows support
   - Apparently old CMD.exe only supports [rudimentary ansii escape codes for colours](https://ss64.com/nt/syntax-ansi.html).
   - New Windows Terminal does support ansi escape codes, so we'd have to explore what works and what doesn't.
