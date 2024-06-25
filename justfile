@@ -14,6 +14,9 @@ setup:
     @echo "👍 Done"
     @echo ""
 
+clean:
+    git clean -fdX
+
 lint:
     @eslint --ext .ts .
 
