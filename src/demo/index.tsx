@@ -48,13 +48,14 @@ function useTerminalSize() {
 }
 
 function View() {
-  const map = useMap<'button1' | 'button2' | 'listitem1' | 'listitem2', number>()
+  const map = useMap<'button1' | 'button2' | 'button3' | 'listitem1' | 'listitem2', number>()
   const size = useTerminalSize();
   const mouse = useMousePosition();
   const action = useMouseAction();
 
 
   return (
+    <>
     <Box
       flexDirection="column"
       paddingY={1}
@@ -101,7 +102,6 @@ function View() {
         </Button>
         <Button onClick={() => {
           map.set('listitem2', (map.get('listitem2') ||0) + 1)
-
         }}>
           <Box flexDirection='row' flexGrow={1}>
             <Box flexDirection='column'>
@@ -116,28 +116,47 @@ function View() {
             </Box>
           </Box>
         </Button>
+
       </Box>
 
-      <Box>
+      <Box marginTop={3}>
         <Text>Log:</Text>
         <Box flexDirection="column">
           <Text>Button 1 Count: {map.get('button1')}</Text>
           <Text>Button 2 Count: {map.get('button2')}</Text>
+          <Text>Button 3 Count: {map.get('button3')}</Text>
           <Text>
             Mouse: {mouse.x},{mouse.y}
           </Text>
           <Text>Action: {action}</Text>
         </Box>
       </Box>
+
+
+
     </Box>
-  );
+    <Button
+      position="absolute"
+      marginTop={1}
+      marginLeft={43}
+      onClick={() => {
+        map.set('button3', (map.get('button3') ||0) + 1)
+      }}
+    >
+        <Text>Button 3</Text>
+    </Button>
+
+    </>
+
+);
 }
 
 function Button({
   label,
   children,
   onClick,
-}: PropsWithChildren<{
+  ...props
+}: PropsWithChildren<ComponentProps<typeof Box> & {
   label?: string;
   onClick?: () => void;
 }>) {
@@ -168,6 +187,7 @@ function Button({
 
   return (
       <Box
+        {...props}
         paddingX={1}
         gap={1}
         ref={ref}
