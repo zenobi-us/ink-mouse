@@ -2,15 +2,15 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import type { ComponentProps, PropsWithChildren } from 'react';
 import { render, Box, Text, useStdout } from 'ink';
 import type { DOMElement } from 'ink';
+import { useMap } from '@react-hookz/web';
 
 import {
   MouseProvider,
-  useElementPosition,
   useMousePosition,
   useMouseAction,
   useOnMouseHover,
   useOnMouseClick,
-} from '../..';
+} from '../../src/ink-mouse.ts';
 
 function App() {
   return (
@@ -48,34 +48,11 @@ function useTerminalSize() {
 }
 
 function View() {
-  const [count, setCount] = useState(0);
+  const map = useMap<'button1' | 'button2' | 'listitem1' | 'listitem2', number>()
   const size = useTerminalSize();
   const mouse = useMousePosition();
   const action = useMouseAction();
 
-  const ref = useRef<DOMElement>(null);
-  const position = useElementPosition(ref);
-  const label = useMemo(() => {
-    // is the mouse getting close to the button?
-    if (!position || !mouse) {
-      return ' 🤔 ';
-    }
-
-    const h = Math.pow(position.left - mouse.x, 2);
-    const v = Math.pow(position.top - mouse.y, 2);
-
-    const distance = Math.sqrt(h + v);
-
-    if (distance < 10) {
-      return ' 💀 ';
-    }
-
-    if (distance < 20) {
-      return ' 🤯 ';
-    }
-
-    return ' 🤭 ';
-  }, [count, position, mouse]);
 
   return (
     <Box
@@ -90,19 +67,62 @@ function View() {
       alignItems="flex-start"
       justifyContent="center"
     >
-      <Box ref={ref}>
+      <Box gap={1} flexDirection='column' width="20">
+      <Box gap={1}>
         <Button
-          label={label}
+          label='button 1'
           onClick={() => {
-            setCount((prev) => prev + 1);
+            map.set('button1', (map.get('button1') ||0) + 1)
           }}
         />
+        <Button
+          label='button 2'
+          onClick={() => {
+            map.set('button2', (map.get('button2') ||0) + 1)
+          }}
+          />
+          </Box>
+        <Button onClick={() => {
+          map.set('listitem1', (map.get('listitem1') ||0) + 1)
+
+        }}>
+          <Box flexDirection='row' flexGrow={1}>
+            <Box flexDirection='column'>
+              <Text color="yellowBright" bold>listitem 1</Text>
+              <Box flexDirection='row' gap={1}>
+                <Text color="gray">subtitle</Text>
+                <Text color="gray">things: 1</Text>
+              </Box>
+            </Box>
+            <Box justifyContent='flex-end' flexGrow={1}>
+              <Text color="brown">clicks: {map.get('listitem1') || 0}</Text>
+            </Box>
+          </Box>
+        </Button>
+        <Button onClick={() => {
+          map.set('listitem2', (map.get('listitem2') ||0) + 1)
+
+        }}>
+          <Box flexDirection='row' flexGrow={1}>
+            <Box flexDirection='column'>
+              <Text color="yellowBright" bold>listitem 2</Text>
+              <Box flexDirection='row' gap={1}>
+                <Text color="gray">subtitle</Text>
+                <Text color="gray">things: 1</Text>
+              </Box>
+            </Box>
+            <Box justifyContent='flex-end' flexGrow={1}>
+              <Text color="brown">clicks: {map.get('listitem2') || 0}</Text>
+            </Box>
+          </Box>
+        </Button>
       </Box>
 
       <Box>
         <Text>Log:</Text>
         <Box flexDirection="column">
-          <Text>Count: {count}</Text>
+          <Text>Button 1 Count: {map.get('button1')}</Text>
+          <Text>Button 2 Count: {map.get('button2')}</Text>
           <Text>
             Mouse: {mouse.x},{mouse.y}
           </Text>
@@ -147,15 +167,15 @@ function Button({
   }, [clicking, hovering]);
 
   return (
-    <Box
-      gap={1}
-      paddingX={1}
-      ref={ref}
-      borderStyle={border}
-    >
-      {!!label && <Text>{label}</Text>}
-      {children}
-    </Box>
+      <Box
+        paddingX={1}
+        gap={1}
+        ref={ref}
+        borderStyle={border}
+      >
+        {!!label && <Text>{label}</Text>}
+        {children}
+      </Box>
   );
 }
 
