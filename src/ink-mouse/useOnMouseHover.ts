@@ -4,7 +4,7 @@ import { type DOMElement } from 'ink';
 import { useMouse } from './useMouse';
 import type { MousePosition } from './MouseContext';
 import { isIntersecting } from './isIntersecting';
-import { getElemenetPosition } from './useElementPosition';
+import { getElementPosition, getElementDimensions } from './useElementPosition';
 
 function useOnMouseHover(
   ref: RefObject<DOMElement>,
@@ -13,10 +13,16 @@ function useOnMouseHover(
   const mouse = useMouse();
 
   const handler = useCallback((position: MousePosition) => {
-    const element = getElemenetPosition(ref.current);
-    if (!element) {
+    const elementPosition = getElementPosition(ref.current);
+    const elementDimensions = getElementDimensions(ref.current);
+    if (!elementPosition || !elementDimensions) {
       return;
     }
+    const element = {
+      ...elementPosition,
+      ...elementDimensions,
+    };
+
     const intersecting = isIntersecting({
       element,
       mouse: position,

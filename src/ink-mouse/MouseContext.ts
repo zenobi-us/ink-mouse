@@ -17,10 +17,14 @@ type MouseContextShape = XtermMouseState;
 
 const MouseContext = createContext<MouseContextShape>({
   events: {} as unknown as XtermMouseEvents,
+  status: 'disabled',
   click: null,
   drag: null,
   position: { x: 0, y: 0 },
   scroll: null,
+  disable: () => {},
+  enable: () => {},
+  toggle: () => {},
 });
 
 export { MouseContext };

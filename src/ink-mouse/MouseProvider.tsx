@@ -9,13 +9,7 @@ function MouseProvider({ children }: PropsWithChildren) {
 
   return (
     <MouseContext.Provider
-      value={{
-        events: mouse.events,
-        click: mouse.click,
-        drag: mouse.drag,
-        position: mouse.position,
-        scroll: mouse.scroll,
-      }}
+      value={mouse}
     >
       {children}
     </MouseContext.Provider>
