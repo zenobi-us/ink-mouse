@@ -64,7 +64,8 @@ export function xtermMouse({
       return;
     }
   };
-  const cleanup = () => {
+
+  const disable = () => {
     process.stdin.off('data', handleEvent);
     process.stdout.write(
       ANSI_CODES.mouseMotion.off +
@@ -72,21 +73,17 @@ export function xtermMouse({
         ANSI_CODES.mouseMotionOthers.off +
         ANSI_CODES.mouseButton.off,
     );
-    process.stdin.setRawMode(false);
   };
 
-  process.stdin.setEncoding('utf8');
-  process.stdin.setRawMode(true);
-  process.stdin.resume();
-
-  process.stdout.write(
-    ANSI_CODES.mouseButton.on +
+  const enable = () => {
+    process.stdout.write(
+      ANSI_CODES.mouseButton.on +
       ANSI_CODES.mouseMotion.on +
       ANSI_CODES.mouseMotionOthers.on +
       ANSI_CODES.mouseSGR.on,
-  );
+    );
+    process.stdin.on('data', handleEvent);
+  }
 
-  process.stdin.on('data', handleEvent);
-
-  return cleanup;
+  return { disable, enable };
 }

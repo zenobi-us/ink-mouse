@@ -12,6 +12,7 @@ const createXtermMouseEvents = () => {
     click: (position: MousePosition, action: MouseClickAction) => void;
     scroll: (position: MousePosition, direction: MouseScrollAction) => void;
     drag: (position: MousePosition, action: MouseDragAction) => void;
+    listen: (yesno: boolean) => void;
   }>();
 };
 type XtermMouseEvents = ReturnType<typeof createXtermMouseEvents>;
