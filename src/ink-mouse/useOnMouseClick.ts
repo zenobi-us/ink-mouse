@@ -1,17 +1,27 @@
-import { useCallback, useEffect, type RefObject } from 'react';
+import { useCallback, useEffect, useMemo, type RefObject } from 'react';
 import { type DOMElement } from 'ink';
 
 import { useMouse } from './useMouse';
 import type { MouseClickAction, MousePosition } from './MouseContext';
 import { isIntersecting } from './isIntersecting';
-import { useElementPosition } from './useElementPosition';
+import { useElementDimensions, useElementPosition } from './useElementPosition';
 
 function useOnMouseClick(
   ref: RefObject<DOMElement>,
   onChange: (event: boolean) => void,
 ) {
   const mouse = useMouse();
-  const element = useElementPosition(ref);
+  const elementPosition = useElementPosition(ref);
+  const elementDimensions = useElementDimensions(ref);
+  const element = useMemo(() => {
+    return {
+      ...elementPosition,
+      ...elementDimensions,
+    }
+  }, [
+    elementPosition,
+    elementDimensions
+  ])
 
   const handler = useCallback(
     (position: MousePosition, action: MouseClickAction) => {
