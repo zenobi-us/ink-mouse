@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/zenobi-us/ink-mouse/compare/ink-mouse-v1.0.2...ink-mouse-v1.0.3) (2024-07-16)
+
+
+### Bug Fixes
+
+* allow mouse tracking to be disabled/enabled ([#12](https://github.com/zenobi-us/ink-mouse/issues/12)) ([20ca224](https://github.com/zenobi-us/ink-mouse/commit/20ca2240628b859d82cba9550ab08dd95c01e31c))
+
 ## [1.0.2](https://github.com/zenobi-us/ink-mouse/compare/ink-mouse-v1.0.1...ink-mouse-v1.0.2) (2024-06-25)
 
 
