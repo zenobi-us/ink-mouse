@@ -22,9 +22,9 @@ function useXtermMouse() {
     x: 0,
     y: 0,
   });
-  const click = useRef<MouseClickAction>();
-  const scroll = useRef<MouseScrollAction>();
-  const drag = useRef<MouseDragAction>();
+  const click = useRef<MouseClickAction | undefined>(undefined);
+  const scroll = useRef<MouseScrollAction | undefined>(undefined);
+  const drag = useRef<MouseDragAction | undefined>(undefined);
 
   const mouse = useRef(
     xtermMouse({
