@@ -7,7 +7,7 @@ import { useEffect, useState, type RefObject } from 'react';
  * @param ref - The reference to the element.
  * @returns The position of the element.
  */
-function useElementPosition(ref: RefObject<DOMElement>, deps: unknown[] = []) {
+function useElementPosition(ref: RefObject<DOMElement | null>, deps: unknown[] = []) {
   const [position, setPosition] = useState<{
     left: number;
     top: number;
@@ -27,7 +27,7 @@ function useElementPosition(ref: RefObject<DOMElement>, deps: unknown[] = []) {
   return position;
 }
 
-function useElementDimensions(ref: RefObject<DOMElement>, deps: unknown[] = []) {
+function useElementDimensions(ref: RefObject<DOMElement | null>, deps: unknown[] = []) {
     const [dimensions, setDimensions] = useState<{
         width: number;
         height: number;

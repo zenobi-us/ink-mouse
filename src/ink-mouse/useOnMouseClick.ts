@@ -7,7 +7,7 @@ import { isIntersecting } from './isIntersecting';
 import { useElementDimensions, useElementPosition } from './useElementPosition';
 
 function useOnMouseClick(
-  ref: RefObject<DOMElement>,
+  ref: RefObject<DOMElement | null>,
   onChange: (event: boolean) => void,
 ) {
   const mouse = useMouse();

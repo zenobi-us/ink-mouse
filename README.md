@@ -16,17 +16,21 @@ https://github.com/zenobi-us/ink-mouse/assets/61225/658ad469-6438-4bff-8695-e2fe
 
 ## Usage
 
+> [!NOTE]
+> Without `useInput`, escape sequence characters will being printed to the terminal during mouse movements.
+
 ```tsx
 import React, { useMemo, useRef, useState } from 'react';
 import type { ComponentProps } from 'react';
-import { Box, DOMElement, Text, render } from 'ink';
+import { Box, DOMElement, Text, render, useInput } from 'ink';
 import {
   MouseProvider,
   useOnMouseHover,
   useMousePosition,
-  useElementPosition,
   useOnMouseClick,
+  useMouse,
 } from '@zenobius/ink-mouse';
+import { useMap } from '@react-hookz/web';
 
 function App() {
   return (
@@ -37,20 +41,34 @@ function App() {
 }
 
 function MyComponent() {
-  const mouse = useMousePosition();
+  const mouse = useMouse();
+  const mousePosition = useMousePosition();
+  const map = useMap<'button1', number>() // Example of a simple state map
+
+  /**
+   * Without this, your terminal will fill up with escape codes when you move the mouse.
+   */
+  useInput((input, key) => {
+      if (key.return) {
+          mouse.toggle()
+      }
+  });
 
   return (
-    <Box>
-      <Button label="Button 1" />
-      <Text>
-        {mouse.x}, {mouse.y}
-      </Text>
+    <Box gap={1} flexDirection='column' width={40} height={10} borderStyle="round" padding={1}>
+      <Box gap={1}>
+        <Button label="Button 1" onClick={() => map.set('button1', (map.get('button1') || 0) + 1)} />
+      </Box>
+      <Box flexDirection="column" gap={1}>
+        <Text>{JSON.stringify(mousePosition)}</Text>
+        <Text>Button 1 clicked: {map.get('button1') || 0} times</Text>
+      </Box>
     </Box>
   );
 }
 
 function Button({ label, onClick }: { label: string; onClick?: () => void }) {
-  const ref = useRef<DOMElement>(null);
+  const ref = useRef<DOMElement | null>(null);
 
   const [hovering, setHovering] = useState(false);
   const [clicking, setClicking] = useState(false);
@@ -117,6 +135,10 @@ All project tasks are managed via Mise in `.mise/tasks/`, you can list them via 
   - Elements positioned absolutely that occupy same space as other elements will mean they both recieve click and hover events.
   - Ink supports absolute positioning. I think z order is based on order rendered.
   - This means to simluate knowing the z order, we might need to register the order in which elements subscribe to events?
+- [ ] Support elements not rendered from 0,0
+  - Currently the mouse position is tracked from the top left of the terminal (0,0).
+  - If an element is rendered starting at (10,10) for example, the mouse position will not be accurate.
+  - We need to track the offset of the element and adjust the mouse position accordingly.
 - [ ] Add tests.
   - testing a device may be difficult; but the implementation is sufficiently abstracted from the device that it should be possible to mock the device input stream.
     - [x] stdin event stream parsing

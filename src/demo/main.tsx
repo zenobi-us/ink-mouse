@@ -12,8 +12,9 @@ import {
     useOnMouseClick,
     useElementPosition,
     useElementDimensions,
-    useMouse
-} from '../../src/ink-mouse.ts';
+    useMouse,
+    useTerminalSize
+} from '../ink-mouse.ts';
 
 function App() {
     return (
@@ -22,33 +23,7 @@ function App() {
         </MouseProvider>
     );
 }
-function useTerminalSize() {
-    const out = useStdout();
-    const [size, setSize] = useState(() => {
-        return {
-            width: out.stdout.columns,
-            height: out.stdout.rows,
-        };
-    });
 
-    useEffect(() => {
-        const handleTerminalResize = () => {
-            setSize(() => ({
-                width: out.stdout.columns,
-                height: out.stdout.rows,
-            }));
-        };
-
-        process.stdout.on('resize', handleTerminalResize);
-        process.stdout.on('SIGWINCH', handleTerminalResize);
-        return () => {
-            process.stdout.off('SIGWINCH', handleTerminalResize);
-            process.stdout.off('resize', handleTerminalResize);
-        };
-    }, []);
-
-    return size;
-}
 
 function View() {
     const map = useMap<'button1' | 'button2' | 'button3' | 'listitem1' | 'listitem2', number>()
@@ -111,6 +86,7 @@ function View() {
                             </Box>
                         </Box>
                     </Button>
+
                     <Button onClick={() => {
                         map.set('listitem2', (map.get('listitem2') || 0) + 1)
                     }}>
