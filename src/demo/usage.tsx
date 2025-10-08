@@ -8,13 +8,16 @@ import {
     useMousePosition,
     useOnMouseClick,
     useMouse,
+    Fullscreen,
 } from '../ink-mouse';
 import { useMap } from '@react-hookz/web';
 
 function App() {
     return (
         <MouseProvider>
-            <MyComponent />
+            <Fullscreen>
+                <MyComponent />
+            </Fullscreen>
         </MouseProvider>
     );
 }
@@ -34,9 +37,19 @@ function MyComponent() {
     });
 
     return (
-        <Box gap={1} flexDirection='column' width="100%">
-            <Box gap={1}>
-                <Button label="Button 1" onClick={() => map.set('button1', (map.get('button1') || 0) + 1)} />
+        <Box gap={1} flexDirection='column' width={30} height={20} padding={5}>
+            <Box>
+                <Button label="Button 1" onClick={() => map.set('button1', (map.get('button1') || 0) + 1)} getProps={(state) => {
+                    if (state === 'clicking') {
+                        return { backgroundColor: 'blue', color: 'white' };
+                    }
+
+                    if (state === 'hovering') {
+                        return { backgroundColor: 'yellow', };
+                    }
+
+                    return {};
+                }} />
             </Box>
             <Box flexDirection="column" gap={1}>
                 <Text>{JSON.stringify(mousePosition)}</Text>
@@ -46,7 +59,7 @@ function MyComponent() {
     );
 }
 
-function Button({ label, onClick }: { label: string; onClick?: () => void }) {
+function Button(props: ComponentProps<typeof Box> & { label: string; onClick?: () => void, getProps?: (state: 'clicking' | 'hovering' | 'idle') => ComponentProps<typeof Box> }) {
     const ref = useRef<DOMElement | null>(null);
 
     const [hovering, setHovering] = useState(false);
@@ -54,22 +67,22 @@ function Button({ label, onClick }: { label: string; onClick?: () => void }) {
 
     useOnMouseClick(ref, (event) => {
         setClicking(event);
-        if (event && typeof onClick === 'function') {
-            onClick();
+        if (event && typeof props.onClick === 'function') {
+            props.onClick();
         }
     });
     useOnMouseHover(ref, setHovering);
 
-    const border = useMemo((): ComponentProps<typeof Box>['borderStyle'] => {
+    const state = useMemo((): 'clicking' | 'hovering' | 'idle' => {
         if (clicking) {
-            return 'double';
+            return 'clicking';
         }
 
         if (hovering) {
-            return 'singleDouble';
+            return 'hovering';
         }
 
-        return 'single';
+        return 'idle';
     }, [clicking, hovering]);
 
     return (
@@ -77,11 +90,14 @@ function Button({ label, onClick }: { label: string; onClick?: () => void }) {
             gap={1}
             paddingX={1}
             ref={ref}
-            borderStyle={border}
+            {...props.getProps?.(state)}
         >
-            <Text>{label}</Text>
+            <Text>{props.label}</Text>
         </Box>
     );
 }
 
-render(<App />);
+render(<App />, {
+    stdin: process.stdin,
+    stdout: process.stdout,
+});

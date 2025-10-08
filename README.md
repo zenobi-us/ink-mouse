@@ -55,7 +55,7 @@ function MyComponent() {
   });
 
   return (
-    <Box gap={1} flexDirection='column' width="100%">
+    <Box gap={1} flexDirection='column' width={40} height={10} borderStyle="round" padding={1}>
       <Box gap={1}>
         <Button label="Button 1" onClick={() => map.set('button1', (map.get('button1') || 0) + 1)} />
       </Box>
@@ -135,6 +135,10 @@ All project tasks are managed via Mise in `.mise/tasks/`, you can list them via 
   - Elements positioned absolutely that occupy same space as other elements will mean they both recieve click and hover events.
   - Ink supports absolute positioning. I think z order is based on order rendered.
   - This means to simluate knowing the z order, we might need to register the order in which elements subscribe to events?
+- [ ] Support elements not rendered from 0,0
+  - Currently the mouse position is tracked from the top left of the terminal (0,0).
+  - If an element is rendered starting at (10,10) for example, the mouse position will not be accurate.
+  - We need to track the offset of the element and adjust the mouse position accordingly.
 - [ ] Add tests.
   - testing a device may be difficult; but the implementation is sufficiently abstracted from the device that it should be possible to mock the device input stream.
     - [x] stdin event stream parsing
