@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# mise description="Run dev server with watch mode"
+
+tsx \
+    --watch \
+    ./src/demo/index.tsx

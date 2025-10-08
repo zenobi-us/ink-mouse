@@ -43,30 +43,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Asdf
-        uses: ./.github/actions/setup-tooling
+      - name: Setup Tooling
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd
         with:
-          SetupCommand: ./tools.sh
+          install: true
+          cache: true
+          experimental: true
 
       - name: Yarn
         uses: ./.github/actions/setup-yarn
 
       - name: Preflight
         run: |
-          just lint
-          just types
-          just unittest
-          just build
-          just integrationtest
+          mise run lint
+          mise run types
+          mise run unittest
+          mise run build
+          mise run integrationtest
 
       - if: ${{ needs.Process.outputs.releases_created == 'true' }}
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: just publish latest
+        run: mise run publish TAG=latest
 
       - if: ${{ needs.Process.outputs.prs_created == 'true' }}
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: just publish next
+        run: mise run publish TAG=next

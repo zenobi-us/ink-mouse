@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# mise description="Run unit tests"
+
+vitest \
+    --dir ./src
