@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
-# mise description="Run dev server with watch mode"
+
+#MISE description="Run dev server with watch mode"
+
+#USAGE flag "-e --example <example>" "Specify example to run" default="main"
+
+# verify that src/demo/${usage_example}.tsx exists
+if [ ! -f ./src/demo/"${usage_example}".tsx ]; then
+    echo "Error: Example '${usage_example}' does not exist in src/demo/"
+
+    # list all files in src/demo
+    echo "Available examples:"
+    ls ./src/demo/*.tsx | xargs -n 1 basename | sed 's/\.tsx$//'
+
+    exit 1
+fi
 
 tsx \
     --watch \
-    ./src/demo/index.tsx
+    ./src/demo/"${usage_example}".tsx

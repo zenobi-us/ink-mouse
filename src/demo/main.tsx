@@ -13,7 +13,7 @@ import {
     useElementPosition,
     useElementDimensions,
     useMouse
-} from '../../src/ink-mouse.ts';
+} from '../ink-mouse.ts';
 
 function App() {
     return (
@@ -111,6 +111,7 @@ function View() {
                             </Box>
                         </Box>
                     </Button>
+
                     <Button onClick={() => {
                         map.set('listitem2', (map.get('listitem2') || 0) + 1)
                     }}>

@@ -16,17 +16,21 @@ https://github.com/zenobi-us/ink-mouse/assets/61225/658ad469-6438-4bff-8695-e2fe
 
 ## Usage
 
+> [!NOTE]
+> Without `useInput`, escape sequence characters will being printed to the terminal during mouse movements.
+
 ```tsx
 import React, { useMemo, useRef, useState } from 'react';
 import type { ComponentProps } from 'react';
-import { Box, DOMElement, Text, render } from 'ink';
+import { Box, DOMElement, Text, render, useInput } from 'ink';
 import {
   MouseProvider,
   useOnMouseHover,
   useMousePosition,
-  useElementPosition,
   useOnMouseClick,
+  useMouse,
 } from '@zenobius/ink-mouse';
+import { useMap } from '@react-hookz/web';
 
 function App() {
   return (
@@ -37,20 +41,34 @@ function App() {
 }
 
 function MyComponent() {
-  const mouse = useMousePosition();
+  const mouse = useMouse();
+  const mousePosition = useMousePosition();
+  const map = useMap<'button1', number>() // Example of a simple state map
+
+  /**
+   * Without this, your terminal will fill up with escape codes when you move the mouse.
+   */
+  useInput((input, key) => {
+      if (key.return) {
+          mouse.toggle()
+      }
+  });
 
   return (
-    <Box>
-      <Button label="Button 1" />
-      <Text>
-        {mouse.x}, {mouse.y}
-      </Text>
+    <Box gap={1} flexDirection='column' width="100%">
+      <Box gap={1}>
+        <Button label="Button 1" onClick={() => map.set('button1', (map.get('button1') || 0) + 1)} />
+      </Box>
+      <Box flexDirection="column" gap={1}>
+        <Text>{JSON.stringify(mousePosition)}</Text>
+        <Text>Button 1 clicked: {map.get('button1') || 0} times</Text>
+      </Box>
     </Box>
   );
 }
 
 function Button({ label, onClick }: { label: string; onClick?: () => void }) {
-  const ref = useRef<DOMElement>(null);
+  const ref = useRef<DOMElement | null>(null);
 
   const [hovering, setHovering] = useState(false);
   const [clicking, setClicking] = useState(false);
