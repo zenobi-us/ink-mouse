@@ -2,12 +2,13 @@ name: Pr
 
 on:
   pull_request:
+  pull_request_target:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-# Needed for nx-set-shas within nx-cloud-main.yml, when run on the master branch
 permissions:
   actions: read
   contents: read
@@ -17,27 +18,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Asdf
-        uses: ./.github/actions/setup-tooling
+        uses: actions/checkout@v4
         with:
-          SetupCommand: ./tools.sh
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
+
+      - name: Setup Tooling
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd
+        with:
+          install: true
+          cache: true
+          experimental: true
 
       - name: Install Node Modules
         uses: ./.github/actions/setup-yarn
 
       - name: lint
-        run: just lint
+        run: mise run lint
 
       - name: unit test
-        run: just unittest
+        run: mise run unittest
 
       - name: build
-        run: just build
+        run: mise run build
 
       - name: integration test
-        run: just integrationtest
+        run: mise run integrationtest
 
       - name: docs
-        run: just docs
+        run: mise run docs

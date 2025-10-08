@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# mise description="Publish to npm registry"
+# mise arg TAG="next"
+
+yarn npm publish \
+    --tag "${TAG}"

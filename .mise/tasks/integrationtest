@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# mise description="Run integration tests"
+
+echo 0

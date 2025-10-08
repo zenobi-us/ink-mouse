@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# mise description="Generate documentation"
+
+typedoc \
+    --plugin typedoc-plugin-markdown \
+    --tsconfig ./tsconfig.lib.json \
+    --out dist/docs \
+    ./src/ink-mouse.ts \
+        --hideBreadcrumbs true \
+        --namedAnchors true \
+        --disableSources \
+        --readme ./README.md \
+        --hideInPageTOC true \
+        --hidePageTitle true \
+        --hideGenerator true
+
+inject-markdown ./README.md
+
+rm -rf dist/docs

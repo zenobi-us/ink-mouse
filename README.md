@@ -96,22 +96,21 @@ render(<App />);
 
 ## Contributing
 
-This project uses ASDF and Yarn.
+This project uses [Mise](https://mise.jdx.dev/) and Yarn.
 
 1. clone repo
 2. make branch: `git checkout [fix|feat|docs|chore]/blah-blah` (see [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-3. run `./tools.sh`
-4. run `just setup`
-5. run `just demo`
-6. run `just unittest`
-7. run `just lint`
+3. run `mise setup`
+4. run `mise demo`
+5. run `mise unittest`
+6. run `mise lint`
 
 ## Todo
 
 - [ ] Support absolute elements
   - Elements positioned absolutely that occupy same space as other elements will mean they both recieve click and hover events.
   - Ink supports absolute positioning. I think z order is based on order rendered.
-  - This means to simluate knowing the z order, we might need to register the order in which elements subscribe to events? 
+  - This means to simluate knowing the z order, we might need to register the order in which elements subscribe to events?
 - [ ] Add tests.
   - testing a device may be difficult; but the implementation is sufficiently abstracted from the device that it should be possible to mock the device input stream.
     - [x] stdin event stream parsing

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# mise description="Run linting checks"
+
+mise run pkgjsonlint
+
+eslint --ext .ts .

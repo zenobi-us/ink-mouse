@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# mise description="Run typescript type checking"
+
+tsc --noEmit \
+    --project \
+    ./tsconfig.json
