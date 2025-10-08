@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/zenobi-us/ink-mouse/compare/ink-mouse-v1.0.3...ink-mouse-v1.0.4) (2025-10-08)
+
+
+### Bug Fixes
+
+* more concrete example without character output spam ([#32](https://github.com/zenobi-us/ink-mouse/issues/32)) ([fc82a4f](https://github.com/zenobi-us/ink-mouse/commit/fc82a4f374ef0ecf445d8587ecf0feabb3b387f8))
+
 ## [1.0.3](https://github.com/zenobi-us/ink-mouse/compare/ink-mouse-v1.0.2...ink-mouse-v1.0.3) (2024-07-16)
 
 
