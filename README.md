@@ -10,6 +10,7 @@ https://github.com/zenobi-us/ink-mouse/assets/61225/658ad469-6438-4bff-8695-e2fe
 - Mouse hover tracking
 - Mouse click tracking
 - Mouse drag tracking
+- Mouse button detection
 - Element position tracking
 
 [Todo](#todo)
@@ -29,6 +30,7 @@ import {
   useMousePosition,
   useOnMouseClick,
   useMouse,
+  useMouseAction,
 } from '@zenobius/ink-mouse';
 import { useMap } from '@react-hookz/web';
 
@@ -43,6 +45,7 @@ function App() {
 function MyComponent() {
   const mouse = useMouse();
   const mousePosition = useMousePosition();
+  const mouseAction = useMouseAction();
   const map = useMap<'button1', number>() // Example of a simple state map
 
   /**
@@ -62,6 +65,7 @@ function MyComponent() {
       <Box flexDirection="column" gap={1}>
         <Text>{JSON.stringify(mousePosition)}</Text>
         <Text>Button 1 clicked: {map.get('button1') || 0} times</Text>
+        <Text>Mouse Action Button: {mouseAction.button}</Text>
       </Box>
     </Box>
   );
@@ -78,7 +82,7 @@ function Button({ label, onClick }: { label: string; onClick?: () => void }) {
     if (event && typeof onClick === 'function') {
       onClick();
     }
-  });
+  }, 'left');
   useOnMouseHover(ref, setHovering);
 
   const border = useMemo((): ComponentProps<typeof Box>['borderStyle'] => {
@@ -151,5 +155,3 @@ All project tasks are managed via Mise in `.mise/tasks/`, you can list them via 
   - Apparently old CMD.exe only supports [rudimentary ansii escape codes for colours](https://ss64.com/nt/syntax-ansi.html).
   - New Windows Terminal does support ansi escape codes, so we'd have to explore what works and what doesn't.
   - We might have to fall back to GPM or some other library. Seems a bit complex. want to avoid it if possible.
-- [ ] Add support for right and middle click.
-  - I think these are supported by the terminal, but I'm not sure how to detect them. Is it lowercase M and R?
