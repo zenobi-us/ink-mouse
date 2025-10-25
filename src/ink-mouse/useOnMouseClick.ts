@@ -2,13 +2,18 @@ import { useCallback, useEffect, useMemo, type RefObject } from 'react';
 import { type DOMElement } from 'ink';
 
 import { useMouse } from './useMouse';
-import type { MouseClickAction, MousePosition } from './MouseContext';
+import type {
+  MouseClickAction,
+  MousePosition,
+  MouseButton,
+} from './MouseContext';
 import { isIntersecting } from './isIntersecting';
 import { useElementDimensions, useElementPosition } from './useElementPosition';
 
 function useOnMouseClick(
   ref: RefObject<DOMElement | null>,
   onChange: (event: boolean) => void,
+  button: MouseButton = 'left',
 ) {
   const mouse = useMouse();
   const elementPosition = useElementPosition(ref);
@@ -24,9 +29,11 @@ function useOnMouseClick(
   ])
 
   const handler = useCallback(
-    (position: MousePosition, action: MouseClickAction) => {
+    (position: MousePosition, action: MouseClickAction, eventButton: MouseButton) => {
       onChange(
-        isIntersecting({ element, mouse: position }) && action === 'press',
+        isIntersecting({ element, mouse: position }) &&
+        action === 'press' &&
+        eventButton === button
       );
     },
     [ref.current],

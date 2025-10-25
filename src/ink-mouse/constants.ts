@@ -1,3 +1,5 @@
+import type { MouseButton } from './MouseContext';
+
 const ANSI_CODES = {
   // SET_X10_MOUSE
   mouseX10: { on: '\x1b[?9h', off: '\x1b[?9l' },
@@ -6,9 +8,9 @@ const ANSI_CODES = {
   // SET_VT200_MOUSE
   mouseButton: { on: '\x1b[?1000h', off: '\x1b[?1000l' },
 
-  // Terminal will send position of the column hilighted
+  // Terminal will send position of the column highlighted
   // SET_VT200_HIGHLIGHT_MOUSE
-  mouseHilight: { on: '\x1b[?1001h', off: '\x1b[?1001l' },
+  mouseHighlight: { on: '\x1b[?1001h', off: '\x1b[?1001l' },
 
   // Terminal will send event on button pressed and mouse motion as long as a button is down, with mouse position
   // SET_BTN_EVENT_MOUSE
@@ -40,9 +42,34 @@ const ANSI_CODES = {
 
 const ANSI_RESPONSE_PATTERNS = {
   scroll: /\[<(64|65);(\d+);(\d+)M$/,
-  drag: /\[<32;(\d+);(\d+)([Mm])$/,
+  drag: /\[<(32|33|34|160|161);(\d+);(\d+)([Mm])$/,
   move: /\[<35;(\d+);(\d+)M$/,
-  click: /\[<0;(\d+);(\d+)([Mm])$/,
+  click: /\[<(0|1|2|128|129);(\d+);(\d+)([Mm])$/,
 };
 
-export { ANSI_CODES, ANSI_RESPONSE_PATTERNS };
+type MouseClickButton = 0 | 1 | 2 | 128 | 129;
+type MouseDragButton = 32 | 33 | 34 | 160 | 161;
+
+const MOUSE_CLICK_BUTTONS: Record<MouseClickButton, MouseButton> = {
+  0: 'left',
+  1: 'middle',
+  2: 'right',
+  128: 'back',
+  129: 'forward',
+};
+
+const MOUSE_DRAG_BUTTONS: Record<MouseDragButton, MouseButton> = {
+  32: 'left',
+  33: 'middle',
+  34: 'right',
+  160: 'back',
+  161: 'forward',
+};
+
+const MOUSE_BUTTONS = {
+  ...MOUSE_CLICK_BUTTONS,
+  ...MOUSE_DRAG_BUTTONS,
+};
+
+export { ANSI_CODES, ANSI_RESPONSE_PATTERNS, MOUSE_BUTTONS };
+export type { MouseClickButton, MouseDragButton };

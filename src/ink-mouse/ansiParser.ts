@@ -1,4 +1,6 @@
-import { ANSI_RESPONSE_PATTERNS } from './constants';
+import type { MouseClickButton, MouseDragButton } from './constants';
+import { ANSI_RESPONSE_PATTERNS, MOUSE_BUTTONS } from './constants';
+import type { MouseButton } from './MouseContext';
 
 const parseXYCoordinates = (input: string, pattern: RegExp) => {
   if (!pattern.test(input)) {
@@ -34,10 +36,19 @@ const parseXYScroll = (
   return { x, y, direction };
 };
 
+const parseMouseButton = (
+  button: MouseClickButton | MouseDragButton,
+): NonNullable<MouseButton> => MOUSE_BUTTONS[button] || 'left';
+
 const parseXYClick = (
   input: string,
   pattern: RegExp,
-): { x: number; y: number; action: 'press' | 'release' } | null => {
+): {
+  x: number;
+  y: number;
+  action: 'press' | 'release';
+  button: 'left' | 'middle' | 'right' | 'back' | 'forward';
+} | null => {
   if (!pattern.test(input)) {
     return null;
   }
@@ -45,10 +56,13 @@ const parseXYClick = (
   if (!match) {
     return null;
   }
-  const x = Number(match[1]);
-  const y = Number(match[2]);
-  const action = match[3] === 'M' ? 'press' : 'release';
-  return { x, y, action };
+  const button: MouseButton = parseMouseButton(
+    Number(match[1]) as MouseClickButton | MouseDragButton,
+  );
+  const x = Number(match[2]);
+  const y = Number(match[3]);
+  const action = match[4] === 'M' ? 'press' : 'release';
+  return { x, y, action, button };
 };
 
 const AnsiSgrParser = {

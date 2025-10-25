@@ -10,6 +10,7 @@ type MousePosition = {
 type MouseClickAction = 'press' | 'release' | null;
 type MouseScrollAction = 'scrollup' | 'scrolldown' | null;
 type MouseDragAction = 'dragging' | null;
+type MouseButton = 'left' | 'middle' | 'right' | 'back' | 'forward' | null;
 
 type MouseAction = MouseClickAction | MouseScrollAction;
 
@@ -22,6 +23,7 @@ const MouseContext = createContext<MouseContextShape>({
   drag: null,
   position: { x: 0, y: 0 },
   scroll: null,
+  button: null,
   disable: () => {},
   enable: () => {},
   toggle: () => {},
@@ -34,5 +36,6 @@ export type {
   MouseClickAction,
   MouseScrollAction,
   MouseDragAction,
+  MouseButton,
   MouseAction,
 };

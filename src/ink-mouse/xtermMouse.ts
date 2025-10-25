@@ -1,4 +1,5 @@
 import type {
+  MouseButton,
   MouseClickAction,
   MouseDragAction,
   MousePosition,
@@ -14,8 +15,8 @@ export function xtermMouse({
   onDrag,
 }: {
   onPosition: (position: MousePosition) => void;
-  onClick: (action: MouseClickAction) => void;
-  onDrag: (direction: MouseDragAction) => void;
+  onClick: (action: MouseClickAction, button: MouseButton) => void;
+  onDrag: (direction: MouseDragAction, button: MouseButton) => void;
   onScroll: (direction: MouseScrollAction) => void;
 }) {
   const handleEvent = (input: string) => {
@@ -25,7 +26,7 @@ export function xtermMouse({
         return;
       }
       onPosition(position);
-      onDrag(position.action === 'press' ? 'dragging' : null);
+      onDrag(position.action === 'press' ? 'dragging' : null, position.button);
       return;
     }
 
@@ -44,9 +45,9 @@ export function xtermMouse({
         return;
       }
       onPosition(position);
-      onClick(position.action);
+      onClick(position.action, position.button);
       setTimeout(() => {
-        onClick(null);
+        onClick(null, null);
       }, 100);
       return;
     }
@@ -78,12 +79,12 @@ export function xtermMouse({
   const enable = () => {
     process.stdout.write(
       ANSI_CODES.mouseButton.on +
-      ANSI_CODES.mouseMotion.on +
-      ANSI_CODES.mouseMotionOthers.on +
-      ANSI_CODES.mouseSGR.on,
+        ANSI_CODES.mouseMotion.on +
+        ANSI_CODES.mouseMotionOthers.on +
+        ANSI_CODES.mouseSGR.on,
     );
     process.stdin.on('data', handleEvent);
-  }
+  };
 
   return { disable, enable };
 }
