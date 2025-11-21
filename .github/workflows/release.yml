@@ -67,4 +67,8 @@ jobs:
         run: mise run publish TAG=latest
 
       - if: ${{ needs.Process.outputs.prs_created == 'true' }}
-        run: mise run publish TAG=next
+        name: Generate prerelease version and publish
+        run: |
+          CURRENT_VERSION=$(jq -r '.version' package.json)
+          PRERELEASE_VERSION=$(npx semver "$CURRENT_VERSION" -i prerelease --preid next)
+          mise run publish TAG=next VERSION=$PRERELEASE_VERSION

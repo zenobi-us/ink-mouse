@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # mise description="Publish to npm registry"
 # mise arg TAG="next"
+# mise arg VERSION=""
+
+if [ -n "$VERSION" ]; then
+    # Update package.json if version provided
+    jq ".version = \"$VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
+fi
 
 yarn npm publish \
     --tag "${TAG}"
