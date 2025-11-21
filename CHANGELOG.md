@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/zenobi-us/ink-mouse/compare/ink-mouse-v1.0.4...ink-mouse-v1.0.5) (2025-11-21)
+
+
+### Bug Fixes
+
+* correct intersection logic ([#36](https://github.com/zenobi-us/ink-mouse/issues/36)) ([54ae5a7](https://github.com/zenobi-us/ink-mouse/commit/54ae5a71b5210645ff838497064d864da57cfe59))
+
 ## [1.0.4](https://github.com/zenobi-us/ink-mouse/compare/ink-mouse-v1.0.3...ink-mouse-v1.0.4) (2025-10-08)
 
 
