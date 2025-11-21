@@ -3,8 +3,9 @@ mise.path = "./node_modules/.bin" # add a directory to PATH
 
 [tools]
 just="1.25.2"
-nodejs="20.12.1"
-yarn="1.22.19"
+yarn= "4.9.4"
 shellcheck="0.9.0"
 jq="1.7.1"
 usage = "latest"
+npm = "11.6.3"
+node = "22.16.0"

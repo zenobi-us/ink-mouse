@@ -65,5 +65,6 @@
   "repository": {
     "type": "github",
     "url": "http://github.com/zenobi-us/ink-mouse"
-  }
+  },
+  "packageManager": "yarn@4.11.0"
 }

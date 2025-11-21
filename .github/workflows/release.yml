@@ -64,11 +64,7 @@ jobs:
           mise run integrationtest
 
       - if: ${{ needs.Process.outputs.releases_created == 'true' }}
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: mise run publish TAG=latest
 
       - if: ${{ needs.Process.outputs.prs_created == 'true' }}
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: mise run publish TAG=next
